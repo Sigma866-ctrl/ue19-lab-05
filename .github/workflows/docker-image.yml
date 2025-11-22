@@ -1,18 +1,44 @@
-name: Docker Image CI
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-
-  build:
-
+  build-and-scan:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # --- Placeholder for the 'Build Container' step from the previous exercise ---
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Build Docker Image
+        # Assume your Dockerfile is in the root directory and you tag it as my-app:latest
+        run: docker build -t my-app:latest .
+        
+      # --- NEW STEP: Scan the Container Image for Vulnerabilities ---
+      - name: Scan Image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          # The image to scan. Replace 'my-app:latest' with your actual image name and tag.
+          image-ref: 'my-app:latest'
+          # Format the output as GitHub annotations (optional but helpful)
+          format: 'github'
+          # Set the severity levels that will cause the step to fail (e.g., CRITICAL, HIGH)
+          severity: 'CRITICAL,HIGH'
+          # Fail the action if vulnerabilities are found based on the severity setting
+          exit-code: '1'
+          
+      # --- Placeholder for the 'Publish Container' step from the previous exercise ---
+      - name: Publish Docker Image (Only if scan passes)
+        # This step will only run if the 'Scan Image with Trivy' step succeeds (i.e., exit-code 0)
+        run: |
+          echo "Proceeding to publish the image..."
+          # Add your actual publish/push command here (e.g., docker push ...)
