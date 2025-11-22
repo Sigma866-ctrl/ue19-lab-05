@@ -1,6 +1,7 @@
 # 1. Image de base
 # Utilise une image officielle légère de Python (3.11 est un bon choix stable)
 FROM python:3.11-slim-bookworm
+FROM debian:12
 
 # 2. Variables d'environnement et métadonnées (optionnel mais recommandé)
 # Définir l'encodage pour éviter les problèmes avec les caractères français
