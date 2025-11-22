@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 5. Copier l'application
 # Copie votre script Python dans le répertoire de travail (/app)
-COPY blague.py .
+COPY app.py .
 
 # 6. Commande d'exécution
 # Commande par défaut à exécuter au démarrage du conteneur
