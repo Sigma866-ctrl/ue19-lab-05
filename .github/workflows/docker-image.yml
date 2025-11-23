@@ -30,7 +30,7 @@ jobs:
           # The image to scan. Replace 'my-app:latest' with your actual image name and tag.
           image-ref: 'my-app:latest'
           # Format the output as GitHub annotations (optional but helpful)
-          format: 'github'
+          format: 'table'
           # Set the severity levels that will cause the step to fail (e.g., CRITICAL, HIGH)
           severity: 'CRITICAL,HIGH'
           # Fail the action if vulnerabilities are found based on the severity setting
