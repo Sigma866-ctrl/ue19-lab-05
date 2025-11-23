@@ -26,4 +26,4 @@ COPY app.py .
 # 6. Commande d'exécution
 # Commande par défaut à exécuter au démarrage du conteneur
 # 'python blague.py' sera exécuté
-CMD ["python", "blague.py"]
+CMD ["python", "app.py"]
